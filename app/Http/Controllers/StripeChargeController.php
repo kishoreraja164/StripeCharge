@@ -45,7 +45,7 @@ class StripeChargeController extends Controller
 		catch (\Exception $e)
 		{
 			//echo "dadsasd";exit;
-			return back()->withErrors(['message' =>  $e->getMessage()]);
+			return back()->withErrors(['message' =>  'Product price is charged but '.$e->getMessage()]);
 		}
 		return redirect('index');
 	}
