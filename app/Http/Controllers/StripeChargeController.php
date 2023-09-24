@@ -21,32 +21,38 @@ class StripeChargeController extends Controller
 		return view('products.payment');
 	}
 	
+	// Product price charge function
 	public function charge(String $product, $price)
 	{
 		$user = Auth::user();
 		return view('products.payment',[
 			'user'=>$user,
+			'amount' => $price,
+            'currency' => 'usd',
 			'intent' => $user->createSetupIntent(),
 			'product' => $product,
-			'price' => $price
+			//'amount' => $price*100
 		]);
 	}
 	
+	// Product price charge payment process
 	public function processPayment(Request $request, String $product, $price)
 	{
 		$user = Auth::user();
 		$paymentMethod = $request->input('payment_method');
 		$user->createOrGetStripeCustomer();
+		$stripeCustomer = $user->asStripeCustomer();
+		//echo'<pre>';print_r($stripeCustomer);exit;
 		$user->addPaymentMethod($paymentMethod);
 		try
 		{
-			$user->charge($price*100, $paymentMethod);
+			$user->charge($price, $paymentMethod,['off_session' => true]);
 		}
 		catch (\Exception $e)
 		{
-			//echo "dadsasd";exit;
-			return back()->withErrors(['message' =>  'Product price is charged but '.$e->getMessage()]);
+			return back()->withErrors(['message' =>  $e->getMessage()]);
 		}
-		return redirect('index');
+		return redirect()->route('products')->withStatus('Payment has done successfully');
+
 	}
 }
