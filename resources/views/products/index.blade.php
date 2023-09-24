@@ -36,6 +36,14 @@ aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 <div class="row">
 <div class="col-lg-12 margin-tb">
 <div class="pull-left">
+
+@if(session('status'))
+	<div class="alert alert-success mb-1 mt-1">
+		{{ session('status') }}
+	</div>
+@endif
+
+
 <h2>StripeCharge - List Products</h2>
 </div>
 </div>

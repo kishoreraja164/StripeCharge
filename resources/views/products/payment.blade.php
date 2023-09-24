@@ -45,7 +45,7 @@
 	<div class="row">
 		<div class="col-md-4">
 				<label for="plan-silver">
-					<span class="plan-price"><b>Price:</b> &#8377;    {{$price}}</span>
+					<span class="plan-price"><b>Price:</b> {{$price}}</span>
 				</label>
 		</div>
 	</div>
