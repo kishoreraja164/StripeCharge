@@ -32,7 +32,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
-<form action="{{route('processPayment', [$product, $price])}}" method="POST" id="subscribe-form">
+<form action="{{route('processPayment', [$product, $amount])}}" method="POST" id="subscribe-form">
 <div class="form-group">
 	<div class="row">
 		<div class="col-md-4">
@@ -45,7 +45,7 @@
 	<div class="row">
 		<div class="col-md-4">
 				<label for="plan-silver">
-					<span class="plan-price"><b>Price:</b> {{$price}}</span>
+					<span class="plan-price"><b>Price:</b> {{$amount}}</span>
 				</label>
 		</div>
 	</div>
